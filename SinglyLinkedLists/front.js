@@ -1,8 +1,10 @@
-// - Remove Front
+// - Contains
 /*
-Write a method to return the value (not the node) at the head of the list. 
-If the list is empty, return null.
+Add a method contains(value) to your SLL class, which is given a value as a parameter.  
+Return a boolean (true/false); true, if the list possesses a node 
+that contains the provided value.
 */
+
 class Node {
     constructor(value){
         this.value = value; // data
@@ -11,8 +13,8 @@ class Node {
 }
 
 class SLL {
-    constructor(head = null) {
-        this.head = head;
+    constructor() {
+        this.head = null;
     }
     addFront(value){
         //Write a method that accepts a value and create a new node
@@ -47,13 +49,29 @@ class SLL {
         }
         return null;
     }
+    
+    // Add a method contains(value) to your SLL class, which is given a value as a parameter.  
+    // Return a boolean (true/false); 
+    // true, if the list possesses a node that contains the provided value.
+    contains(value) {
+        var temp = this.head;
+        while(temp) {
+            if (temp.value == value) {
+                return true;
+            }
+            temp = temp.next;
+        }
+        return false;
+    }
+    
 }
-
 
 let sll = new SLL();
 sll.addFront(5);
-sll.addFront(4);
-sll.addFront(10);
-sll.removeFront();
-// sll.front();
-console.log(sll.front());
+sll.addFront(15);
+sll.addFront(25);
+sll.addFront(35);
+console.log(sll.contains(9));
+console.log(sll.contains(15));
+
+

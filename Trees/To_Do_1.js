@@ -3,115 +3,49 @@ class BTNode {
         this.val = value;
         this.left = null;
         this.right = null;
-        this.count = 1;
     }
 }
+
 class BST {
     constructor() {
         this.root = null;
     }
-    // add methods here...
-    add(value){
-        if (this.root === null){ //checking if node actually exists
-            this.root = new BTNode(value);
-        } else {
-            var runner = this.root;
-        
-            while (runner) {
-                if (value === runner.val) { // If equal
-                    runner.count++;
-                    break;
-                // if less than
-                } else if (value < runner.val) {
-                    if (!runner.left) {
-                        runner.left = new BTNode(value);
-                        break;
-                    } else {
-                        runner = runner.left;
-                    }
-                // If greater than
-                } else {
-                    if (!runner.right) {
-                        runner.right = new BTNode(value);
-                        break;
-                    } else {
-                        runner = runner.right;
-                    }
-                }
-            }
-        }
-    }
 
-    contains(value) {
+    add(value) {
+        var newNode = new BTNode(value);
         if (this.root === null) {
-            return false;
+            this.root = newNode;
+            return this;
         }
-        var runner = this.root;
+        let runner = this.root;
+
         while (runner) {
-            if (value === runner.val) {
-                return true;
-            }
-            if (value < runner.val) {
-                if (!runner.left) {
-                    return false;
+            if (value === runner.value) return undefined;
+
+            if (value < runner.value) {
+                if (runner.left === null) {
+                    runner.left = newNode;
+                    return this;
                 }
                 runner = runner.left;
             } else {
-                if (!runner.right) {
-                    return false;
+                if (runner.right === null) {
+                    runner.right = newNode;
+                    return this;
                 }
                 runner = runner.right;
             }
         }
-        return false;
     }
 
-    min(value) {
-        if (this.root === null) {
-            return null;
-        }
-        var runner = this.root;
-        while (runner.left) {
-            runner = runner.left;
-        }
-        return runner.val;
-    } 
 
-    max(value) {
-        if (this.root === null) {
-            return null;
-        }
-        var runner = this.root;
-        while (runner.right) {
-            runner = runner.right;
-        }
-        return runner.val;
-    }
-
-    size(value) {
-        if (this.root === null) {
-            return 0;
-        }
-        function flood(leaf) {
-            if (leaf === null) {
-                return 0;
-            }
-            return 1 + flood(leaf.left) + flood(leaf.right);
-        }
-        return flood(this.root);
-    }
 }
-var tree = new BST();
-tree.add(3);
-// console.log(tree);
-tree.add(4);
-console.log("Size: ", tree.size());
-// console.log(tree);
-// console.log(tree.contains(4));
-tree.add(21);
-console.log("Minimum: ", tree.min());
 
-console.log("Maximum: ", tree.max());
-console.log("Size: ", tree.size());
-
-
+var bst = new BST();
+console.log(bst.add(12));
+console.log(bst.add(103));
+console.log(bst.add(31));
+console.log(bst.add(29));
+console.log(bst.add(76));
+console.log(bst.add(89));
+// console.log(bst);
